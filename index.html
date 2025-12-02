@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="id">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Info Banjir Sumatra</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      width: 100%;
+      height: 100%;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .app-wrapper {
+      width: 100%;
+      min-height: 100%;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    }
+
+    .hero-section {
+      padding: 80px 40px 40px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
+    }
+
+    .hero-image {
+      max-width: 600px;
+      margin: 0 auto 40px;
+      filter: drop-shadow(0 10px 30px rgba(59, 130, 246, 0.3));
+    }
+
+    .main-title {
+      font-size: 56px;
+      font-weight: 800;
+      margin: 0 0 24px 0;
+      color: #3b82f6;
+      text-shadow: 0 2px 20px rgba(59, 130, 246, 0.3);
+    }
+
+    .hero-description {
+      font-size: 20px;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+      color: #cbd5e1;
+    }
+
+    .stats-container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      padding: 40px 40px 60px;
+    }
+
+    .stat-card {
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(10px);
+      border: 2px solid #334155;
+      border-radius: 20px;
+      padding: 32px 40px;
+      min-width: 200px;
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      border-color: #3b82f6;
+      box-shadow: 0 10px 40px rgba(59, 130, 246, 0.2);
+    }
+
+    .stat-number {
+      font-size: 48px;
+      font-weight: 800;
+      color: #3b82f6;
+      margin: 0 0 8px 0;
+    }
+
+    .stat-label {
+      font-size: 16px;
+      color: #94a3b8;
+      margin: 0;
+    }
+
+    .content-section {
+      padding: 60px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 36px;
+      font-weight: 700;
+      color: #3b82f6;
+      margin: 0 0 32px 0;
+      text-align: center;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      margin-bottom: 60px;
+    }
+
+    .info-card {
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(10px);
+      border: 2px solid #334155;
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.3s ease;
+    }
+
+    .info-card:hover {
+      border-color: #3b82f6;
+      transform: translateY(-3px);
+    }
+
+    .info-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .info-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #e2e8f0;
+      margin: 0 0 16px 0;
+    }
+
+    .info-text {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #cbd5e1;
+      margin: 0;
+    }
+
+    .gallery-section {
+      margin-bottom: 60px;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .photo-card {
+      background: rgba(30, 41, 59, 0.6);
+      border: 2px solid #334155;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .photo-card:hover {
+      transform: translateY(-5px);
+      border-color: #3b82f6;
+      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+    }
+
+    .photo-placeholder {
+      width: 100%;
+      background: #1e3a5f;
+      aspect-ratio: 4/3;
+    }
+
+    .photo-placeholder svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .photo-caption {
+      padding: 16px;
+      font-size: 14px;
+      color: #cbd5e1;
+      margin: 0;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .tips-section {
+      background: rgba(59, 130, 246, 0.05);
+      border-radius: 20px;
+      padding: 40px;
+      margin-top: 40px;
+    }
+
+    .tips-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .tip-item {
+      background: rgba(30, 41, 59, 0.6);
+      border-left: 4px solid #3b82f6;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      border-radius: 8px;
+      font-size: 16px;
+      color: #cbd5e1;
+      transition: all 0.3s ease;
+    }
+
+    .tip-item:hover {
+      background: rgba(30, 41, 59, 0.9);
+      transform: translateX(5px);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px;
+      color: #64748b;
+      font-size: 14px;
+      border-top: 1px solid #334155;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="app-wrapper">
+   <div class="hero-section">
+    <h1 class="main-title" id="mainTitle">Banjir di Sumatra</h1>
+    <p class="hero-description" id="heroDescription">Informasi penting tentang banjir yang terjadi di wilayah Sumatra dan langkah-langkah pencegahan yang perlu dilakukan</p>
+    <svg class="hero-image" viewbox="0 0 600 400" xmlns="http://www.w3.org/2000/svg"><!-- Sky --> <rect width="600" height="200" fill="#1e3a5f" /> <!-- Dark rain clouds --> <ellipse cx="150" cy="80" rx="80" ry="40" fill="#2d4a6b" opacity="0.9" /> <ellipse cx="200" cy="70" rx="70" ry="35" fill="#2d4a6b" opacity="0.9" /> <ellipse cx="350" cy="90" rx="90" ry="45" fill="#2d4a6b" opacity="0.9" /> <ellipse cx="450" cy="75" rx="75" ry="38" fill="#2d4a6b" opacity="0.9" /> <!-- Rain drops --> <g opacity="0.6" stroke="#64b5f6" stroke-width="2" stroke-linecap="round">
+      <line x1="120" y1="120" x2="110" y2="150" />
+      <line x1="160" y1="130" x2="150" y2="160" />
+      <line x1="200" y1="125" x2="190" y2="155" />
+      <line x1="240" y1="135" x2="230" y2="165" />
+      <line x1="280" y1="128" x2="270" y2="158" />
+      <line x1="320" y1="140" x2="310" y2="170" />
+      <line x1="360" y1="133" x2="350" y2="163" />
+      <line x1="400" y1="127" x2="390" y2="157" />
+      <line x1="440" y1="138" x2="430" y2="168" />
+      <line x1="480" y1="131" x2="470" y2="161" />
+     </g> <!-- Mountains/Hills background --> <path d="M 0 200 Q 100 160, 200 200 T 400 200 T 600 200 L 600 400 L 0 400 Z" fill="#1a4d2e" /> <!-- Flooded area/water --> <rect y="280" width="600" height="120" fill="#1e88e5" /> <rect y="280" width="600" height="120" fill="#0d47a1" opacity="0.3" /> <!-- Water waves --> <path d="M 0 280 Q 30 270, 60 280 T 120 280 T 180 280 T 240 280 T 300 280 T 360 280 T 420 280 T 480 280 T 540 280 T 600 280" stroke="#64b5f6" stroke-width="2" fill="none" opacity="0.5" /> <path d="M 0 300 Q 40 290, 80 300 T 160 300 T 240 300 T 320 300 T 400 300 T 480 300 T 560 300 T 600 300" stroke="#42a5f5" stroke-width="2" fill="none" opacity="0.4" /> <!-- Houses partially submerged --> <!-- House 1 --> <g>
+      <rect x="80" y="260" width="70" height="60" fill="#8b4513" />
+      <polygon points="115,240 60,270 170,270" fill="#d32f2f" />
+      <rect x="95" y="285" width="20" height="35" fill="#5d4037" />
+      <rect x="130" y="275" width="15" height="15" fill="#fff176" opacity="0.7" />
+     </g> <!-- House 2 --> <g>
+      <rect x="380" y="250" width="80" height="70" fill="#6d4c41" />
+      <polygon points="420,225 360,260 480,260" fill="#c62828" />
+      <rect x="400" y="280" width="25" height="40" fill="#4e342e" />
+      <rect x="440" y="270" width="18" height="18" fill="#fff59d" opacity="0.7" />
+     </g> <!-- Palm trees partially in water --> <!-- Tree 1 --> <g>
+      <rect x="250" y="240" width="12" height="80" fill="#5d4037" />
+      <ellipse cx="256" cy="235" rx="25" ry="15" fill="#2e7d32" />
+      <ellipse cx="256" cy="228" rx="22" ry="12" fill="#388e3c" />
+      <ellipse cx="256" cy="222" rx="18" ry="10" fill="#43a047" />
+     </g> <!-- Tree 2 --> <g>
+      <rect x="520" y="250" width="10" height="70" fill="#5d4037" />
+      <ellipse cx="525" cy="245" rx="20" ry="12" fill="#2e7d32" />
+      <ellipse cx="525" cy="240" rx="18" ry="10" fill="#388e3c" />
+      <ellipse cx="525" cy="235" rx="15" ry="8" fill="#43a047" />
+     </g> <!-- Floating debris --> <rect x="180" y="310" width="40" height="8" fill="#795548" opacity="0.8" rx="2" /> <rect x="340" y="330" width="35" height="6" fill="#8d6e63" opacity="0.8" rx="2" /> <circle cx="480" cy="320" r="12" fill="#a1887f" opacity="0.7" /> <!-- Person on roof calling for help --> <g>
+      <circle cx="430" cy="240" r="8" fill="#ffab91" />
+      <rect x="425" y="248" width="10" height="15" fill="#1565c0" />
+      <line x1="430" y1="250" x2="420" y2="235" stroke="#ffab91" stroke-width="3" stroke-linecap="round" />
+      <line x1="430" y1="258" x2="425" y2="270" stroke="#1565c0" stroke-width="3" stroke-linecap="round" />
+      <line x1="430" y1="258" x2="435" y2="270" stroke="#1565c0" stroke-width="3" stroke-linecap="round" />
+     </g>
+    </svg>
+   </div>
+   <div class="stats-container">
+    <div class="stat-card">
+     <div class="stat-number" id="stat1Number">
+      15+
+     </div>
+     <p class="stat-label" id="stat1Label">Provinsi Terdampak</p>
+    </div>
+    <div class="stat-card">
+     <div class="stat-number" id="stat2Number">
+      1.2M+
+     </div>
+     <p class="stat-label" id="stat2Label">Warga Terpengaruh</p>
+    </div>
+    <div class="stat-card">
+     <div class="stat-number" id="stat3Number">
+      500+
+     </div>
+     <p class="stat-label" id="stat3Label">Titik Banjir</p>
+    </div>
+   </div>
+   <div class="content-section">
+    <h2 class="section-title">Informasi Penting</h2>
+    <div class="info-grid">
+     <div class="info-card">
+      <div class="info-icon">
+       🌧️
+      </div>
+      <h3 class="info-title">Penyebab Banjir</h3>
+      <p class="info-text">Curah hujan tinggi, deforestasi, dan perubahan iklim menjadi penyebab utama banjir di Sumatra. Sistem drainase yang tidak memadai juga memperparah situasi.</p>
+     </div>
+     <div class="info-card">
+      <div class="info-icon">
+       🗺️
+      </div>
+      <h3 class="info-title">Wilayah Rawan</h3>
+      <p class="info-text">Sumatra Utara, Sumatra Barat, Riau, dan Sumatra Selatan merupakan daerah yang paling sering terdampak banjir, terutama di daerah dataran rendah.</p>
+     </div>
+     <div class="info-card">
+      <div class="info-icon">
+       ⚠️
+      </div>
+      <h3 class="info-title">Dampak Banjir</h3>
+      <p class="info-text">Kerugian infrastruktur, gangguan ekonomi, risiko kesehatan, dan pengungsian massal menjadi dampak serius dari banjir di wilayah Sumatra.</p>
+     </div>
+    </div>
+    <div class="gallery-section">
+     <h2 class="section-title">Dokumentasi Banjir Sumatra</h2>
+     <div class="photo-grid">
+      <div class="photo-card">
+       <div class="photo-placeholder">
+        <svg viewbox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><!-- Flooded street scene --> <rect width="400" height="300" fill="#2c5f8d" /> <rect y="180" width="400" height="120" fill="#1e4d73" /> <!-- Buildings partially submerged --> <rect x="50" y="120" width="80" height="100" fill="#8b6f47" /> <rect x="55" y="125" width="20" height="25" fill="#f4e4c1" /> <rect x="85" y="125" width="20" height="25" fill="#f4e4c1" /> <rect x="55" y="160" width="20" height="25" fill="#f4e4c1" /> <rect x="85" y="160" width="20" height="25" fill="#f4e4c1" /> <rect x="270" y="100" width="90" height="120" fill="#a67c52" /> <rect x="280" y="110" width="25" height="30" fill="#fff9e6" /> <rect x="315" y="110" width="25" height="30" fill="#fff9e6" /> <rect x="280" y="150" width="25" height="30" fill="#fff9e6" /> <rect x="315" y="150" width="25" height="30" fill="#fff9e6" /> <!-- Water with ripples --> <ellipse cx="150" cy="240" rx="40" ry="8" fill="#3d7ea6" opacity="0.5" /> <ellipse cx="300" cy="260" rx="35" ry="7" fill="#3d7ea6" opacity="0.5" /> <!-- Floating objects --> <rect x="180" y="230" width="30" height="5" fill="#8b4513" rx="2" /> <circle cx="240" cy="250" r="8" fill="#654321" /> <text x="200" y="290" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">
+          Jalan Terendam Banjir
+         </text>
+        </svg>
+       </div>
+       <p class="photo-caption">Kondisi jalan raya yang terendam air setinggi 1-2 meter</p>
+      </div>
+      <div class="photo-card">
+       <div class="photo-placeholder">
+        <svg viewbox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><!-- Evacuation scene --> <rect width="400" height="300" fill="#4a7ba7" /> <rect y="200" width="400" height="100" fill="#2d5a7b" /> <!-- Boat --> <path d="M 150 200 L 120 220 L 280 220 L 250 200 Z" fill="#8b4513" /> <rect x="145" y="185" width="110" height="15" fill="#a0826d" /> <!-- People in boat --> <circle cx="170" cy="180" r="8" fill="#ffcc99" /> <rect x="165" y="188" width="10" height="12" fill="#ff6b6b" /> <circle cx="200" cy="178" r="8" fill="#ffcc99" /> <rect x="195" y="186" width="10" height="14" fill="#4ecdc4" /> <circle cx="230" cy="180" r="8" fill="#ffcc99" /> <rect x="225" y="188" width="10" height="12" fill="#ffd93d" /> <!-- Houses in background --> <rect x="30" y="140" width="60" height="80" fill="#7d5a3d" /> <polygon points="60,120 20,150 100,150" fill="#b71c1c" /> <rect x="310" y="130" width="70" height="90" fill="#6b4e3d" /> <polygon points="345,105 295,140 395,140" fill="#c62828" /> <text x="200" y="290" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">
+          Evakuasi Warga
+         </text>
+        </svg>
+       </div>
+       <p class="photo-caption">Proses evakuasi warga menggunakan perahu karet</p>
+      </div>
+      <div class="photo-card">
+       <div class="photo-placeholder">
+        <svg viewbox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><!-- Refugee camp --> <rect width="400" height="300" fill="#87a96b" /> <!-- Tents --> <polygon points="80,180 60,220 100,220" fill="#e8f5e9" /> <polygon points="80,180 100,220 120,220 100,180" fill="#c8e6c9" /> <polygon points="180,170 155,220 205,220" fill="#fff9c4" /> <polygon points="180,170 205,220 230,220 205,170" fill="#fff59d" /> <polygon points="280,175 255,220 305,220" fill="#e1f5fe" /> <polygon points="280,175 305,220 330,220 305,175" fill="#b3e5fc" /> <!-- People --> <circle cx="140" cy="210" r="6" fill="#ffcc99" /> <rect x="136" y="216" width="8" height="10" fill="#64b5f6" /> <circle cx="240" cy="215" r="6" fill="#ffcc99" /> <rect x="236" y="221" width="8" height="10" fill="#ff8a80" /> <!-- Aid boxes --> <rect x="340" y="200" width="25" height="25" fill="#8d6e63" /> <rect x="370" y="200" width="25" height="25" fill="#8d6e63" /> <text x="352" y="215" fill="#fff" font-size="12" font-weight="bold">
+          📦
+         </text> <text x="382" y="215" fill="#fff" font-size="12" font-weight="bold">
+          📦
+         </text> <text x="200" y="290" text-anchor="middle" fill="#2d3436" font-size="14" font-weight="bold">
+          Posko Pengungsian
+         </text>
+        </svg>
+       </div>
+       <p class="photo-caption">Tenda pengungsian dan distribusi bantuan darurat</p>
+      </div>
+      <div class="photo-card">
+       <div class="photo-placeholder">
+        <svg viewbox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><!-- Damaged infrastructure --> <rect width="400" height="300" fill="#5d8aa8" /> <rect y="220" width="400" height="80" fill="#36454f" /> <!-- Broken bridge --> <rect x="50" y="180" width="120" height="20" fill="#6b5b4e" /> <rect x="230" y="180" width="120" height="20" fill="#6b5b4e" /> <!-- Gap in bridge --> <line x1="170" y1="185" x2="230" y2="195" stroke="#ff6b6b" stroke-width="3" /> <line x1="170" y1="195" x2="230" y2="185" stroke="#ff6b6b" stroke-width="3" /> <!-- Pillars --> <rect x="80" y="200" width="20" height="60" fill="#4a4a4a" /> <rect x="280" y="200" width="20" height="60" fill="#4a4a4a" /> <!-- Damaged road --> <path d="M 0 240 L 150 240 L 160 250 L 240 250 L 250 240 L 400 240" fill="#2c3e50" /> <!-- Cracks --> <path d="M 160 240 L 165 255 L 170 240" stroke="#e74c3c" stroke-width="2" fill="none" /> <path d="M 240 240 L 235 255 L 230 240" stroke="#e74c3c" stroke-width="2" fill="none" /> <text x="200" y="290" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">
+          Kerusakan Infrastruktur
+         </text>
+        </svg>
+       </div>
+       <p class="photo-caption">Jembatan dan jalan rusak akibat derasnya arus banjir</p>
+      </div>
+     </div>
+    </div>
+    <div class="tips-section">
+     <h2 class="section-title">Tips Menghadapi Banjir</h2>
+     <ul class="tips-list">
+      <li class="tip-item">🏠 Persiapkan tas darurat berisi dokumen penting, obat-obatan, dan pakaian cadangan</li>
+      <li class="tip-item">📱 Simpan nomor darurat dan pantau informasi cuaca secara berkala</li>
+      <li class="tip-item">💡 Matikan listrik dan gas jika air mulai naik ke dalam rumah</li>
+      <li class="tip-item">🚶 Hindari berjalan atau berkendara melalui genangan air yang dalam</li>
+      <li class="tip-item">🆘 Segera menuju ke tempat yang lebih tinggi jika peringatan banjir dikeluarkan</li>
+      <li class="tip-item">🤝 Ikuti arahan dari petugas BPBD dan tim SAR setempat</li>
+      <li class="tip-item">💧 Simpan persediaan air bersih dan makanan yang tidak mudah rusak</li>
+      <li class="tip-item">🌳 Dukung program reboisasi dan jaga kebersihan saluran air di lingkungan Anda</li>
+     </ul>
+    </div>
+   </div>
+   <div class="footer">
+    <p>Tetap waspada dan selalu siap siaga menghadapi bencana banjir</p>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      main_title: "Banjir di Sumatra",
+      hero_description: "Informasi penting tentang banjir yang terjadi di wilayah Sumatra dan langkah-langkah pencegahan yang perlu dilakukan",
+      stat1_number: "15+",
+      stat1_label: "Provinsi Terdampak",
+      stat2_number: "1.2M+",
+      stat2_label: "Warga Terpengaruh",
+      stat3_number: "500+",
+      stat3_label: "Titik Banjir",
+      background_color: "#0f172a",
+      surface_color: "#1e293b",
+      text_color: "#e2e8f0",
+      primary_color: "#3b82f6",
+      secondary_color: "#334155",
+      font_family: "Inter",
+      font_size: 16
+    };
+
+    async function onConfigChange(config) {
+      const baseSize = config.font_size || defaultConfig.font_size;
+      const customFont = config.font_family || defaultConfig.font_family;
+      const fontStack = `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`;
+
+      document.body.style.fontFamily = `${customFont}, ${fontStack}`;
+      document.body.style.background = config.background_color || defaultConfig.background_color;
+      document.body.style.color = config.text_color || defaultConfig.text_color;
+
+      const appWrapper = document.querySelector('.app-wrapper');
+      appWrapper.style.background = `linear-gradient(135deg, ${config.background_color || defaultConfig.background_color} 0%, ${config.surface_color || defaultConfig.surface_color} 100%)`;
+
+      const mainTitle = document.getElementById('mainTitle');
+      mainTitle.textContent = config.main_title || defaultConfig.main_title;
+      mainTitle.style.fontSize = `${baseSize * 3.5}px`;
+      mainTitle.style.color = config.primary_color || defaultConfig.primary_color;
+
+      const heroDesc = document.getElementById('heroDescription');
+      heroDesc.textContent = config.hero_description || defaultConfig.hero_description;
+      heroDesc.style.fontSize = `${baseSize * 1.25}px`;
+      heroDesc.style.color = config.text_color || defaultConfig.text_color;
+
+      document.getElementById('stat1Number').textContent = config.stat1_number || defaultConfig.stat1_number;
+      document.getElementById('stat1Label').textContent = config.stat1_label || defaultConfig.stat1_label;
+      document.getElementById('stat2Number').textContent = config.stat2_number || defaultConfig.stat2_number;
+      document.getElementById('stat2Label').textContent = config.stat2_label || defaultConfig.stat2_label;
+      document.getElementById('stat3Number').textContent = config.stat3_number || defaultConfig.stat3_number;
+      document.getElementById('stat3Label').textContent = config.stat3_label || defaultConfig.stat3_label;
+
+      const statCards = document.querySelectorAll('.stat-card');
+      statCards.forEach(card => {
+        card.style.background = `rgba(30, 41, 59, 0.6)`;
+        card.style.borderColor = config.secondary_color || defaultConfig.secondary_color;
+      });
+
+      const statNumbers = document.querySelectorAll('.stat-number');
+      statNumbers.forEach(num => {
+        num.style.fontSize = `${baseSize * 3}px`;
+        num.style.color = config.primary_color || defaultConfig.primary_color;
+      });
+
+      const statLabels = document.querySelectorAll('.stat-label');
+      statLabels.forEach(label => {
+        label.style.fontSize = `${baseSize}px`;
+      });
+
+      const sectionTitles = document.querySelectorAll('.section-title');
+      sectionTitles.forEach(title => {
+        title.style.fontSize = `${baseSize * 2.25}px`;
+        title.style.color = config.primary_color || defaultConfig.primary_color;
+      });
+
+      const infoCards = document.querySelectorAll('.info-card');
+      infoCards.forEach(card => {
+        card.style.background = `rgba(30, 41, 59, 0.6)`;
+        card.style.borderColor = config.secondary_color || defaultConfig.secondary_color;
+      });
+
+      const photoCards = document.querySelectorAll('.photo-card');
+      photoCards.forEach(card => {
+        card.style.background = `rgba(30, 41, 59, 0.6)`;
+        card.style.borderColor = config.secondary_color || defaultConfig.secondary_color;
+      });
+
+      const infoTitles = document.querySelectorAll('.info-title');
+      infoTitles.forEach(title => {
+        title.style.fontSize = `${baseSize * 1.5}px`;
+        title.style.color = config.text_color || defaultConfig.text_color;
+      });
+
+      const infoTexts = document.querySelectorAll('.info-text');
+      infoTexts.forEach(text => {
+        text.style.fontSize = `${baseSize}px`;
+      });
+
+      const photoCaptions = document.querySelectorAll('.photo-caption');
+      photoCaptions.forEach(caption => {
+        caption.style.fontSize = `${baseSize * 0.875}px`;
+      });
+
+      const tipItems = document.querySelectorAll('.tip-item');
+      tipItems.forEach(item => {
+        item.style.background = `rgba(30, 41, 59, 0.6)`;
+        item.style.borderLeftColor = config.primary_color || defaultConfig.primary_color;
+        item.style.fontSize = `${baseSize}px`;
+      });
+
+      const footer = document.querySelector('.footer');
+      footer.style.borderTopColor = config.secondary_color || defaultConfig.secondary_color;
+      footer.style.fontSize = `${baseSize * 0.875}px`;
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.surface_color || defaultConfig.surface_color,
+            set: (value) => {
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ surface_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (value) => {
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ primary_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.secondary_color || defaultConfig.secondary_color,
+            set: (value) => {
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ secondary_color: value });
+              }
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => {
+            if (window.elementSdk) {
+              window.elementSdk.setConfig({ font_family: value });
+            }
+          }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (value) => {
+            if (window.elementSdk) {
+              window.elementSdk.setConfig({ font_size: value });
+            }
+          }
+        }
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["main_title", config.main_title || defaultConfig.main_title],
+        ["hero_description", config.hero_description || defaultConfig.hero_description],
+        ["stat1_number", config.stat1_number || defaultConfig.stat1_number],
+        ["stat1_label", config.stat1_label || defaultConfig.stat1_label],
+        ["stat2_number", config.stat2_number || defaultConfig.stat2_number],
+        ["stat2_label", config.stat2_label || defaultConfig.stat2_label],
+        ["stat3_number", config.stat3_number || defaultConfig.stat3_number],
+        ["stat3_label", config.stat3_label || defaultConfig.stat3_label]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a78f5de06ecf876',t:'MTc2NDY1ODk2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
